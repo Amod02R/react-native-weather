@@ -4,8 +4,9 @@ import Txt from "../components/Txt";
 import Basic from "../components/Basic";
 import { getinterpretation } from "../utils/weatherUtils";
 import { Advanced } from "../components/Advanced";
+import SearchBar from "../components/SearchBar";
 
-export default function Home({ weather, location }) {
+export default function Home({ weather, location, search }) {
   const current_weather = weather.current_weather;
   const currentInterpretation = getinterpretation(current_weather.weathercode);
   return (
@@ -19,7 +20,7 @@ export default function Home({ weather, location }) {
         />
       </View>
       <View style={s.middle}>
-        <Txt>Search</Txt>
+        <SearchBar onSubmit={search} />
       </View>
       <View style={s.bottom}>
         <Advanced

@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Alert, ImageBackground } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { s } from "./App.style";
 import Home from "./pages/Home";
@@ -45,7 +45,7 @@ export default function App() {
         lng: location.coords.longitude,
       });
     } else {
-      setCoordinates({ lat: "16.06", lng: "73.46" });
+      setCoordinates({ lat: 16.06, lng: 73.46 });
     }
   }
 
@@ -57,6 +57,15 @@ export default function App() {
   async function getLocationData(coords) {
     const data = await weatherAPI.fetchLocationData(coords);
     setLocation(data);
+  }
+
+  async function getCoordinatesbyCity(city) {
+    try {
+      const data = await weatherAPI.fetchCoordinatesbyCity(city);
+      setCoordinates(data);
+    } catch (error) {
+      Alert.alert(error);
+    }
   }
 
   const Stack = createNativeStackNavigator();
@@ -84,7 +93,13 @@ export default function App() {
                 initialRouteName="Home"
               >
                 <Stack.Screen name="Home">
-                  {() => <Home weather={weather} location={location} />}
+                  {() => (
+                    <Home
+                      weather={weather}
+                      location={location}
+                      search={getCoordinatesbyCity}
+                    />
+                  )}
                 </Stack.Screen>
                 <Stack.Screen name="Forecasts" component={Forecasts} />
               </Stack.Navigator>

@@ -31,3 +31,5 @@ export function getinterpretation(code) {
     interpretation.codes.includes(code)
   );
 }
+
+export const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];

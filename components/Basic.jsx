@@ -23,7 +23,13 @@ export default function Basic({
       </View>
       <View style={s.temp_box}>
         <TouchableOpacity
-          onPress={() => nav.navigate("Forecasts", { city, ...dailyWeather })}
+          onPress={() =>
+            nav.navigate("Forecasts", {
+              city,
+              ...interpretation,
+              ...dailyWeather,
+            })
+          }
         >
           <Txt style={s.temperature}>{temperature}°</Txt>
         </TouchableOpacity>
